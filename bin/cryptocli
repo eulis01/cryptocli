@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-require 'dotenv'
-Dotenv.load('./.env')
 
-require_relative '../lib/crypto_cli'
+
+require_relative '../lib/crypto_cli.rb'
 
 Crypto::CLI.new.call

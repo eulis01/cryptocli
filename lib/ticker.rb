@@ -1,25 +1,26 @@
 
 class Crypto::Ticker
-	print 'Ticker Initialized Gathering data'
+
+	#print 'Ticker Initialized Gathering data'
 	@@data = nil
 
 	def initialize
-		get_ticker
-		#@@data = data
+		get_ticker 
 	end
 
-	DATA = "https://pro-api.coinmarketcap.com"
-	KEY = ENV['X-CMC_PRO_API_KEY']
+	KEY = ENV['API_KEY']
+	URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{KEY}&start=1&limit=15&cryptocurrency_type=all"
 
-	#/&start=1&limit=15	&?limit=15
 	def get_ticker
-		res = RestClient.get("#{DATA}#{ KEY}/v1/cryptocurrency/quotes/latest")
-		data = JSON.parse(res.body)
-		data['result'].each do |ticker|
-		Crypto.new(ticker['data'])
-		end
-	end
 
+		response = RestClient.get(URL)
+		@@data = JSON.parse(response)
+		
+
+		
+	#binding. pry
+	end
+	
 	def data
 		@@data
 	end

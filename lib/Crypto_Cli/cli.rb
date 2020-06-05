@@ -1,9 +1,8 @@
-
 class Crypto::CLI
-	print 'CLI Loaded'
+	
 	@@ticker = Crypto::Ticker.new.data
 
-	def call
+	def call 
 		welcome
 		list_crypto_currencies
 		get_selection_input
@@ -22,6 +21,7 @@ class Crypto::CLI
 			twenty_four_hour = (c['percent_change_24h'][0] == '-' ? c['percent_change_24h'].red : c['percent_change_24h'].green)
 			rows << [c['rank'], c["symbol"], c["name"], currency_format(c['price_usd']), one_hour+"%", twenty_four_hour+"%"]
 		end
+		
 		table = Terminal::Table.new :title => "Crypto Cli", :headings => ['Rank', 'Ticker', 'Name', 'Price', '1 Hr %', '24 Hr %'], :rows => rows
 		puts table
 		puts ""
@@ -78,13 +78,13 @@ class Crypto::CLI
 
 	def crypto_detail(input)
 		c = ticker[input.to_i - 1]
-		
+
 		price = currency_format(c['price_usd'])
 		market_cap = currency_format(c['market_cap_usd']).gsub(".0", "")
-		daily_vol = currency_format(c['24h_volume_usd']).gsub(".0", "")
-		available_supply = currency_format(c['available_supply']).gsub(".0", "").gsub("$", "")
+		circulating_supply = currency_format(c['24h_volume_usd']).gsub(".0", "")
+		volume_24h = currency_format(c['volume_24h']).gsub(".0", "").gsub("$", "")
 		max_supply = c['max_supply']!=nil ? currency_format(c['max_supply']).gsub(".0", "").gsub("$", "") : "N/A"
-		available_percent = max_supply=="N/A" ? "N/A" : ((c['available_supply'].to_f / c['max_supply'].to_f)*100).round(2)
+		available_percent = max_supply=="N/A" ? "N/A" : ((c['volume_24h'].to_f / c['max_supply'].to_f)*100).round(2)
 		one_hour = (c['percentage_change_1h'][0] == '-' ? c['percentage_change_1h'].red : c['percentage_change_1h'].green)
 		twenty_four_hour = (c['percentage_change_24h'][0] == '-' ? c['percentage_change_24h'].red : c['percentage_change_24h'].green)
 		seven_days = (c['percent_change_7d'][0] == '-' ? c['percent_change_7d'].red : c['percent_change_7d'].green)
@@ -94,7 +94,7 @@ class Crypto::CLI
 		table1 = Terminal::Table.new :title => "#{c['name']} Details", :headings => ['Symbol', 'Price', '1 Hr %', '24 Hr %', '7 Day %'], :rows => row1		
 		
 		row2 = []
-		row2 << [ market_cap, daily_vol, available_supply, max_supply, "#{available_percent}%"]
+		row2 << [ market_cap, circulating_supply, volume_24h, max_supply, "#{available_percent}%"]
 		table2 = Terminal::Table.new :title => "#{c['name']} Market Information", :headings => ['Market Cap', '24 Hr Volume', 'Avaiable Supply', 'Total Supply', 'Available %'], :rows => row2
 
 		puts table1, table2
