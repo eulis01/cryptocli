@@ -3,6 +3,25 @@
 Welcome to Crypto Cli 
 a command line applicaton get all the current Crypto prices and Market Ticker updates every minutes.
 
+
+## Manual installation
+Make sure the following gem are installed if they are not by running the ```gem install 'Crypto_CLI'```
+
+check you gems on the terminal ```gem list```
+gems require by this project 
+```gem bundler
+   gem rake
+   gem rspec
+   gem rest-client
+   gem pry
+   gem crack #=> for parsing json files.
+   gem terminal-table #=> to make table easy.
+   gem colorize #=> make thing colorful.
+   gem dotenv #=> Keep your api key secure.
+   ```
+
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -14,6 +33,7 @@ gem 'Crypto_CLI'
 And then execute:
 
     $ bundle install
+    #=> should install
 
 Or install it yourself as:
 

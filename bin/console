@@ -1,17 +1,18 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-require "bundler/setup"
-require_relative "../config/environment.rb"
+require 'bundler/setup'
+require_relative '../config/environment.rb'
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
 # (If you use this, don't forget to add pry to your Gemfile!)
-require "pry"
+require 'pry'
 Pry.start
 def reload!
-	load './lib/crypto_quote.rb'
-	load './lib/crypto_cli/api.rb'
+  load './lib/crypto_Cli.rb'
+  load './lib/crypto_cli/api.rb'
 end
 
-require "irb"
+require 'irb'
 IRB.start(__FILE__)

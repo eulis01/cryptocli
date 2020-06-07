@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class Crypto::CLI
+  attr_accessor :ticker
+  def initialize
+    @@ticker
+  end
   puts '✅CLI Loaded✅'
-  @@ticker = Crypto::Ticker.new.data
+  @@ticker = Crypto::Api.new.data
 
   def call
     welcome
@@ -18,7 +22,7 @@ class Crypto::CLI
   def list_crypto_currencies
     rows = []
     puts ''
-    ticker.each do |c|
+    @@ticker.each do |c|
       one_hour = (c['percent_change_1h'][0] == '-' ? c['percent_change_1h'].red : c['percent_change_1h'].green)
       twenty_four_hour = (c['percent_change_24h'][0] == '-' ? c['percent_change_24h'].red : c['percent_change_24h'].green)
       rows << [c['cmc_rank'], c['symbol'], c['name'], currency_format(c['price']), one_hour + '%', twenty_four_hour + '%']
@@ -70,7 +74,6 @@ class Crypto::CLI
     @@ticker
   end
 
-  # binding.pry
   def ticker_count
     @@ticker.count
   end

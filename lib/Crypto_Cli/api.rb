@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'pry'
-class Crypto::Ticker
+class Crypto::Api
+  attr_accessor :data
   puts '⛓Api Loaded ⛓'
   @@data = []
 
@@ -13,16 +14,18 @@ class Crypto::Ticker
   BASE_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{KEY}&limit=15&cryptocurrency_type=all"
 
   def get_ticker
-    response = RestClient.get(BASE_URL)
-    json = Crack::JSON.parse(response)
-    puts json
-    json.each do |k|
-      @@data << k
-    end
+    res = RestClient.get(BASE_URL)
+    @@data = Crack::JSON.parse(res)
+
+    # @@data.push(json)
+    # puts json.to_s
+    # json.each do |k|
+    #  @@data << k
+    # end
   end
-  # binding.pry
 
   def data
     @@data
   end
+  # binding.pry
 end
