@@ -10,7 +10,7 @@ require "pry"
 Pry.start
 def reload!
 	load './lib/crypto_quote.rb'
-	load './lib/ticker.rb'
+	load './lib/api.rb'
 end
 
 require "irb"

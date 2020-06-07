@@ -25,8 +25,8 @@ $ cryptocli
 ```
 
 ```ruby
-puts "Welcome to the Cryto Cli App."
-puts "The quotes are from https://coinmarketcap.com and are updated every minutes."
+"Welcome to the Cryto Cli App."
+"The quotes are from https://coinmarketcap.com and are updated every minutes."
 ```
 
 display a table of summary data
@@ -38,16 +38,6 @@ display a table of summary data
 
 type the number of the crypto currency to see more information
 Type exit to exit
-
-$ 1
-
-Bitcoin Details
-Ticker, Name, Price, % 1 Hour, % 24 Hours, % 7 Days,
-Market Cap
-24 Volume
-Available Supply (% of max)
-Max Supply
-
 type l or list to go back
 type exit to exit
 
