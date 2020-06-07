@@ -1,0 +1,5 @@
+sudo: false
+language: ruby
+rvm:
+  - 1.29.10
+  before_install: gem install bundler -v 2.6.1
