@@ -14,9 +14,10 @@ class Crypto::Api
   BASE_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{KEY}&limit=15&cryptocurrency_type=all"
 
   def get_ticker
-    res = RestClient.get(BASE_URL)
-    @@data = Crack::JSON.parse(res)
-
+    res = RestClient.get(BASE_URL).read
+    parse_res = Crack::JSON.parse(res)
+    @@data << parse_res
+    binding.pry
     # @@data.push(json)
     # puts json.to_s
     # json.each do |k|
