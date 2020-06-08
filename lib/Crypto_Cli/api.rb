@@ -2,31 +2,28 @@
 
 require 'pry'
 class Crypto::Api
-  attr_accessor :data
   puts '⛓Api Loaded ⛓'
-  @@data = []
+  @@data = nil
 
-  def get_ticker
+  def initialize
     get_ticker
   end
 
   KEY = ENV['API_KEY']
-  BASE_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{KEY}&limit=15&cryptocurrency_type=all"
+  URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{KEY}&limit=15&cryptocurrency_type=all"
 
   def get_ticker
-    json = RestClient.get(BASE_URL).read
-    parse_json = Crack::JSON.parse(res)
-    @@data << parse_json
-    binding.pry
-    # @@data.push(json)
-    # puts json.to_s
-    # json.each do |k|
-    #  @@data << k
-    # end
+    data = URL
+    uri = URI(data)
+    response = Net::HTTP.get(uri)
+    # response = RestClient.get(URL)
+    @@data = JSON.parse(response)
+
+    # binding.pry
   end
 
   def data
     @@data
   end
-  # binding.pry
 end
+# binding.pry
