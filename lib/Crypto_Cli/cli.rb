@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
 class Crypto::CLI
-  attr_accessor :ticker
-  def initialize
-    @@ticker
-  end
   puts '✅CLI Loaded✅'
   @@ticker = Crypto::Api.new.data
-
+  # binding.pry
   def call
     welcome
     list_crypto_currencies
@@ -50,7 +46,7 @@ class Crypto::CLI
       get_selection_input
     elsif valid_input?(input)
       crypto_detail(input)
-     end
+    end
     detailed_instructions
   end
 
@@ -83,7 +79,7 @@ class Crypto::CLI
   end
 
   def crypto_detail(input)
-    c = ticker[input.to_i - 1]
+    c = @@ticker[input.to_i - 1]
     #=> gsub- replaces all instances of a string.
     price = currency_format(c['price'])
     market_cap = currency_format(c['market_cap']).gsub('.0', '')
