@@ -9,7 +9,6 @@ Gem::Specification.new do |spec|
   spec.version       = Crypto::VERSION
   spec.authors       = ['eulis01']
   spec.email         = ['eulis01@gmail.com']
-
   spec.summary       = 'A 💎Gem💎 to Display current Crypto prices.'
   spec.description   = 'This gem will display top 15 currency information.'
   spec.homepage      = 'https://github.com/eulis01/Crypto_Cli'
