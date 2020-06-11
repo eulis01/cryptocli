@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require 'pry'
 class Crypto::Api
-  puts '⛓Api Loaded ⛓'
-  @@data = nil
+  puts 'Api Loaded '
+  attr_reader :data
+  # @@data = nil raise error undefined method `[]' for nil:NilClass (NoMethodError)
 
   def initialize
+    @data = []
     get_ticker
   end
 
@@ -13,17 +14,12 @@ class Crypto::Api
   URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{KEY}&limit=15&cryptocurrency_type=all"
 
   def get_ticker
-    data = URL
-    uri = URI(data)
-    response = Net::HTTP.get(uri)
+    data_url = URL
+    uri = URI(data_url)
+    response = Net::HTTP.get_response(uri)
+    body = response.body
+    @data = JSON.parse(body)
     # response = RestClient.get(URL)
-    @@data = JSON.parse(response)
-
-    # binding.pry
-  end
-
-  def data
-    @@data
   end
 end
 # binding.pry

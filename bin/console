@@ -12,6 +12,7 @@ Pry.start
 def reload!
   load './lib/crypto_Cli.rb'
   load './lib/crypto_cli/api.rb'
+  load './lib/cryto_cli/ticker.rb'
 end
 
 require 'irb'

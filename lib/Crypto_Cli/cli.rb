@@ -1,29 +1,33 @@
 # frozen_string_literal: true
 
 class Crypto::CLI
-  puts '✅CLI Loaded✅'
-  @@ticker = Crypto::Api.new.data
+  attr_reader :ticker, :data
+
   # binding.pry
   def call
+    @ticker = Crypto::Api.new.data
+    # @ticker = Crypto::Api.new.data
     welcome
     list_crypto_currencies
     get_selection_input
   end
 
+  # binding.pry
   def welcome
-    puts 'Welcome to the Cryto Cli App.'
+    puts 'Welcome to the Cryto CLI App.'
     puts 'The data are from https://www.coinmarketcap.com and are update every minutes.'
   end
 
   def list_crypto_currencies
     rows = []
     puts ''
-    @@ticker.each do |c|
-      one_hour = (c['percent_change_1h'][0] == '-' ? c['percent_change_1h'].red : c['percent_change_1h'].green)
-      twenty_four_hour = (c['percent_change_24h'][0] == '-' ? c['percent_change_24h'].red : c['percent_change_24h'].green)
-      rows << [c['cmc_rank'], c['symbol'], c['name'], currency_format(c['price']), one_hour + '%', twenty_four_hour + '%']
+    # ticker.each raise error no implicit convertion of interger into string
+    # Ticker.all.each do |ticker|
+    @ticker.each do |d|
+      one_hour = (d['percent_change_1h'][0] == '-' ? d['percent_change_1h'].red : d['percent_change_1h'].green)
+      twenty_four_hour = (d['percent_change_24h'][0] == '-' ? d['percent_change_24h'].red : d['percent_change_24h'].green)
+      rows << [d['cmc_rank'], d['symbol'], d['name'], currency_format(d['price']), one_hour + '%', twenty_four_hour + '%']
     end
-
     table = Terminal::Table.new title: 'Crypto Cli', headings: ['Rank', 'Ticker', 'Name', 'Price', '1 Hr %', '24 Hr %'], rows: rows
     puts table
     puts ''
@@ -66,12 +70,8 @@ class Crypto::CLI
     end
   end
 
-  def ticker
-    @@ticker
-  end
-
   def ticker_count
-    @@ticker.count
+    @ticker.count
   end
 
   def valid_input?(input)
@@ -79,26 +79,26 @@ class Crypto::CLI
   end
 
   def crypto_detail(input)
-    c = @@ticker[input.to_i - 1]
+    d = ticker[input.to_i - 1]
     #=> gsub- replaces all instances of a string.
-    price = currency_format(c['price'])
-    market_cap = currency_format(c['market_cap']).gsub('.0', '')
-    circulating_supply = currency_format(c['volume_24h']).gsub('.0', '')
-    volume_24h = currency_format(c['volume_24h']).gsub('.0', '').gsub('$', '')
-    max_supply = !c['max_supply'].nil? ? currency_format(c['max_supply']).gsub('.0', '').gsub('$', '') : 'N/A'
-    available_percent = max_supply == 'N/A' ? 'N/A' : ((c['volume_24h'].to_f / c['max_supply'].to_f) * 100).round(2)
-    one_hour = (c['percent_change_1h'][0] == '-' ? c['percent_change_1h'].red : c['percent_change_1h'].green)
-    twenty_four_hour = (c['percent_change_24h'][0] == '-' ? c['percent_change_24h'].red : c['percent_change_24h'].green)
-    twenty_four_hour = (c['percent_change_24h'][0] == '-' ? c['percent_change_24h'].red : c['percent_change_24h'].green)
-    seven_days = (c['percent_change_7d'][0] == '-' ? c['percent_change_7d'].red : c['percent_change_7d'].green)
+    price = currency_format(d['price'])
+    market_cap = currency_format(d['market_cap']).gsub('.0', '')
+    circulating_supply = currency_format(d['circulating_supply']).gsub('.0', '')
+    max_supply = !d['max_supply'].nil? ? currency_format(d['max_supply']).gsub('.0', '').gsub('$', '') : 'N/A'
+    available_percent = max_supply == 'N/A' ? 'N/A' : ((d['volume_24h'].to_f / d['max_supply'].to_f) * 100).round(2)
+    volume_24h = currency_format(data['volume_24h']).gsub('.0', '').gsub('$', '')
+    one_hour = (d['percent_change_1h'][0] == '-' ? d['percent_change_1h'].red : d['percent_change_1h'].green)
+    twenty_four_hour = (d['percent_change_24h'][0] == '-' ? d['percent_change_24h'].red : d['percent_change_24h'].green)
+    twenty_four_hour = (d['percent_change_24h'][0] == '-' ? d['percent_change_24h'].red : d['percent_change_24h'].green)
+    seven_days = (d['percent_change_7d'][0] == '-' ? d['percent_change_7d'].red : d['percent_change_7d'].green)
 
     row1 = []
-    row1 << [c['symbol'], price, one_hour + '%', twenty_four_hour + '%', seven_days + '%']
-    table1 = Terminal::Table.new title: "#{c['name']} Details", headings: ['Symbol', 'Price', '1 Hr %', '24 Hr %', '7 Day %'], rows: row1
+    row1 << [d['symbol'], price, one_hour + '%', twenty_four_hour + '%', seven_days + '%']
+    table1 = Terminal::Table.new title: "#{d['name']} Details", headings: ['Symbol', 'Price', '1 Hr %', '24 Hr %', '7 Day %'], rows: row1
 
     row2 = []
-    row2 << c[market_cap, circulating_supply, volume_24h, max_supply, "#{available_percent}%"]
-    table2 = Terminal::Table.new title: "#{c['name']} Market Information", headings: ['Market Cap', '24 Hr Volume', 'Avaiable Supply', 'Total Supply', 'Available %'], rows: row2
+    row2 << d[market_cap, circulating_supply, volume_24h, max_supply, "#{available_percent}%"]
+    table2 = Terminal::Table.new title: "#{d['name']} Market Information", headings: ['Market Cap', '24 Hr Volume', 'Avaiable Supply', 'Total Supply', 'Available %'], rows: row2
 
     puts table1, table2
   end
