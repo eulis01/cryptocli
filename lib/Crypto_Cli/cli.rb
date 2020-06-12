@@ -2,62 +2,41 @@
 
 class CLI
   def call
-    @ticker = Api.new.data
     welcome
-    top_5_crypto
-    get_selection_input
+    Api.get_ticker
+    ticker_list
+    user_input
+    get_detailed_input
   end
 
   def welcome
-    puts '|==============================================================================|'
-    puts '|------------------------Welcome to the Cryto CLI App--------------------------|'
-    puts '|-------------The data are from https://www.coinmarketcap.com -----------------|'
+    puts '|=========================Welcome to the Cryto CLI App=========================|'
+    puts '|==============The data are from https://www.coinmarketcap.com ================|'
   end
 
-  def top_5_crypto
-    puts '|==============================================================================|'
-    puts '|------------------------Today Top 5 CryptoCurrency----------------------------|'
-    puts '|==============================================================================|'
-    5.times do |_ticker|
-      puts '|================================1=============================================|'
+  def ticker_list
+    puts '|=========================Today Top 15 CryptoCurrency==========================|'
+    Ticker.all.each_with_index do |cmc_rank, index|
+      puts "                                   #{index + 1}.#{cmc_rank.name}                       "
     end
-    selection_instructions
-    end
-
-  def selection_instructions
-    puts 'Type  Y To Get Top 15 Of The Day & Reload Ticker'
-    puts 'Type N to Exit'
-    get_selection_input
+    user_input
   end
 
-  def get_selection_input
-    input = gets.strip
-    if input.upcase == 'N'
-      goodbye
-      exit
-    elsif input.upcase == 'Y'
-      top_15_crypto
-      get_selection_input
-    elsif valid_input?(input)
-      crypto_detail(input)
+  def user_input
+    puts '!!Chose A Number 1 to 15!!'
+    index = gets.strip.to_i - 1
+    name = Ticker.all[index]
+    last_ticker = Ticker.all.size - 1
+    unless index.between?(0, last_ticker)
+      puts '!!Chose A Number 1 to 15!!'
+      index = gets.strip.to_i - 1
+      user_input
     end
-    selection_instructions
-end
-
-  def valid_input?(input)
-    input.upcase == 'Y' || input.upcase == 'N'
-  end
-
-  def top_15_crypto
-    puts '|==============================================================================|'
-    puts '|------------------------Today Top 15 CryptoCurrency---------------------------|'
-    puts '|==============================================================================|'
-    15.times do |_ticker|
-      puts '|==============================================================================|'
-      puts '|------------------------Today Top  CryptoCurrency-----------------------------|'
-      puts '|==============================================================================|'
-    end
-    selection_instructions
+    puts "                                   Rank => #{name.cmc_rank}   "
+    puts "                                   Name => #{name.name}       "
+    puts "                                   Symbol => #{name.symbol}   "
+    puts "                                   Price USD => #{name.price} "
+    user_input
   end
 
   def goodbye
