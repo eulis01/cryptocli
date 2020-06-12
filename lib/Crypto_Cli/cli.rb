@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Crypto::CLI
-  attr_accessor :ticker, :data
   def call
-    @ticker = Crypto::Api.new.data
+    Api.get_ticker
     welcome
     top_5_crypto
     get_selection_input
@@ -19,7 +18,7 @@ class Crypto::CLI
     puts '-------------------------------------------------------------------------------'
     puts '------------------------Today Top 5 CryptoCurrency-----------------------------'
     puts '-------------------------------------------------------------------------------'
-    puts @ticker['data'][0]
+    puts " 1=> #{data.cmc_rank}"
     # puts @ticker['data'][1]
     # puts @ticker['data'][2]
     # puts @ticker['data'][3]
