@@ -1,7 +1,7 @@
-# CryptoCli !! Warning Project not Completed!!
+# CryptoCli !! 
 
 Welcome to Crypto Cli 
-a command line applicaton get all the current Crypto prices and Market Ticker updates every minutes.
+a command line applicaton get all the Top 15 Crypto of the day prices and show detailed information.
 
 
 ## Manual installation
@@ -51,8 +51,7 @@ $ cryptocli
 "The quotes are from https://coinmarketcap.com and are updated every reload of the app."
 ```
 
-type Y to see Top 15 Crypto of the day
-Type N to Exit
+type a number 1 to 15 to see more details.
 
 ## Development
 
