@@ -2,5 +2,5 @@
 # frozen_string_literal: true
 
 require_relative '../config/environment.rb'
-
+# instanciate and return a new CLI object and call load up my CLI code.
 CLI.new.call
