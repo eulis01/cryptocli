@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'json'
   # spec.add_development_dependency 'rest-client'
-  spec.add_development_dependency 'terminal-table'
-  spec.add_development_dependency 'colorize'
+  # spec.add_development_dependency 'terminal-table'
+  # spec.add_development_dependency 'colorize'
   spec.add_development_dependency 'dotenv', '~>2.7.5'
 end

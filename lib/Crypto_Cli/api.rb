@@ -2,11 +2,10 @@
 
 class Crypto::Api
   puts 'Api Loaded '
-  attr_reader :data
-  # @@data = nil raise error undefined method `[]' for nil:NilClass (NoMethodError)
+  attr_accessor :data
 
   def initialize
-    @data = []
+    @data
     get_ticker
   end
 
@@ -19,7 +18,14 @@ class Crypto::Api
     response = Net::HTTP.get_response(uri)
     body = response.body
     @data = JSON.parse(body)
-    # response = RestClient.get(URL)
   end
 end
-# binding.pry
+# "data": [
+#  {
+#  "id": 1,
+#  "name": "Bitcoin",
+#  "symbol": "BTC",
+#  "cmc_rank": 1,
+#  "quote": {
+#  "USD": {
+#  "price": 9356.24564637,
