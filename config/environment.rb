@@ -9,6 +9,7 @@ Dotenv.load
 
 # the order of these file is important
 # require_relative is use to require file in path
-require_relative '../lib/crypto_cli/api.rb'
+
 require_relative '../lib/crypto_cli/cli.rb'
+require_relative '../lib/crypto_cli/api.rb'
 require_relative '../lib/crypto_cli/ticker.rb'
