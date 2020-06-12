@@ -1,4 +1,4 @@
-# CryptoCli !! 
+# CryptoCli 
 
 Welcome to Crypto Cli 
 a command line applicaton get all the Top 15 Crypto of the day prices and show detailed information.
