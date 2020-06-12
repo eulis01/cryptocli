@@ -1,4 +1,8 @@
 example_id                     | status | run_time        |
 ------------------------------ | ------ | --------------- |
-./spec/crypto_cli_spec.rb[1:1] | passed | 0.00255 seconds |
-./spec/crypto_cli_spec.rb[1:2] | passed | 0.00012 seconds |
+./spec/crypto_cli_spec.rb[1:1] | passed | 0.00102 seconds |
+./spec/crypto_cli_spec.rb[1:2] | passed | 0.00009 seconds |
+./spec/crypto_cli_spec.rb[1:3] | passed | 0.00036 seconds |
+./spec/crypto_cli_spec.rb[1:4] | passed | 0.00011 seconds |
+./spec/crypto_cli_spec.rb[1:5] | passed | 0.0001 seconds  |
+./spec/crypto_cli_spec.rb[1:6] | passed | 0.00006 seconds |

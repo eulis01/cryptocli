@@ -15,8 +15,9 @@ task default: :spec
 task :console do
   def reload!
     load './lib/Crypto_Cli.rb'
-    load './lib/ticker.rb'
-    load './lib/Cryto_Cli/cli.rb'
+    load './lib/Crypto_Cli/api.rb'
+    load './lib/Cryto_Cli/cli.rb
+    load './lib/Cryto_Cli/ticker'
   end
   Pry.start
 end

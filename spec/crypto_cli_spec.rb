@@ -6,6 +6,22 @@ RSpec.describe Crypto do
   end
 
   it 'has a module Crypto' do
-    expect(Crypto::Api).not_to be nil
+    expect(Crypto)
+  end
+
+  it 'has a class Api' do
+    expect(Api).not_to be nil
+  end
+
+  it 'has a class CLI' do
+    expect(CLI).not_to be nil
+  end
+
+  it 'has a class Ticker' do
+    expect(Ticker).not_to be nil
+  end
+
+  it 'has a class variable @all' do
+    expect(@all) == []
   end
 end

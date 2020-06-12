@@ -1,25 +1,20 @@
 # frozen_string_literal: true
 
-class Crypto::Api
-  puts 'Api Loaded '
-  attr_reader :data
-  # @@data = nil raise error undefined method `[]' for nil:NilClass (NoMethodError)
-
-  def initialize
-    @data = []
-    get_ticker
-  end
-
+class Api
   KEY = ENV['API_KEY']
-  URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{KEY}&limit=15&cryptocurrency_type=all"
+  BASE_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=#{KEY}&limit=15&cryptocurrency_type=all"
 
-  def get_ticker
-    data_url = URL
+  def self.get_ticker
+    data_url = BASE_URL
     uri = URI(data_url)
     response = Net::HTTP.get_response(uri)
-    body = response.body
-    @data = JSON.parse(body)
-    # response = RestClient.get(URL)
+    parsed_data = JSON.parse(response.body)
+    parsed_data['data'].each do |ticker|
+      cmc_rank = ticker['cmc_rank']
+      name = ticker['name']
+      symbol = ticker['symbol']
+      price = ticker['quote']['USD']['price']
+      Ticker.new(cmc_rank, name, symbol, price)
+    end
   end
 end
-# binding.pry

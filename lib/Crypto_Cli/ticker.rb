@@ -1,24 +1,18 @@
 # frozen_string_literal: true
 
-class Crypto::Ticker
-  attr_accessor :ticker, :data
+class Ticker
+  attr_reader :name, :cmc_rank, :symbol, :price
+  @@all = []
 
-  def initialize(_ticker)
-    @data.all.each do |d|
-      name = d['name']
-      cmc_rank = d['cmc_rank']
-      symbol = d['symbol']
-      price = d['price']
-      market_cap = d['market_cap']
-      circulating_supply = d['circurlating_supply']
+  def initialize( cmc_rank, name, symbol, price)
+    @cmc_rank = cmc_rank
+    @name = name
+    @symbol = symbol
+    @price = price
+    @@all << self
+  end
 
-      total_supply = d['total_supply']
-      max_supply = d['max_supply']
-      percent_change_1h = d['percent_change_1h']
-      percent_change_24h = d['percent_change_24h']
-      percent_change_7d = d['percent_change_7d']
-      last_updated = d['last_updated']
-      @data << self
-    end
+  def self.all
+    @@all
   end
 end
