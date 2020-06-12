@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-class Crypto::Api
+class Api
+  attr_accessor :data
   def initialize
+    @data = []
     get_ticker
   end
 
@@ -13,14 +15,7 @@ class Crypto::Api
     uri = URI(data_url)
     response = Net::HTTP.get_response(uri)
     body = response.body
-    data = JSON.parse(body)
-    data.each do |data|
-      cmc_rank = data['cmc_rank']
-      name = data['name']
-      symbol = data['symbol']
-      price = data['price']
-      Ticker.new(cmc_rank, name, symbol, price)
-    end
+    @data = JSON.parse(body)
   end
 end
 # "data": [

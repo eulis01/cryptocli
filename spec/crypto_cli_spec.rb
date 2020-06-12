@@ -5,6 +5,10 @@ RSpec.describe Crypto do
     expect(Crypto::VERSION).not_to be nil
   end
 
+  it 'has a module Crypto' do
+    expect(Crypto)
+  end
+
   it 'has a class Api' do
     expect(Api).not_to be nil
   end

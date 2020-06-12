@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative '../lib/crypto_cli.rb'
+require_relative '../config/environment.rb'
 
-Crypto::CLI.new.call
+CLI.new.call
