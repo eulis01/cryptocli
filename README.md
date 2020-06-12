@@ -15,6 +15,7 @@ gems require by this project
    gem rspec
    gem pry
 
+not in use future update
    gem rest-clien
    gem crack #=> for parsing json files.
    gem terminal-table #=> to make table easy.
