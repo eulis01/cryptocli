@@ -10,14 +10,16 @@ Make sure the following gem are installed if they are not by running the ```gem 
 check you gems on the terminal ```gem list```
 gems require by this project 
 ```gem bundler
+   gem dotenv #=> Keep your api key secure.
    gem rake
    gem rspec
-   gem rest-client
    gem pry
+
+not in use future update
+   gem rest-clien
    gem crack #=> for parsing json files.
    gem terminal-table #=> to make table easy.
    gem colorize #=> make thing colorful.
-   gem dotenv #=> Keep your api key secure.
    ```
 
 
@@ -46,20 +48,11 @@ $ cryptocli
 
 ```ruby
 "Welcome to the Cryto Cli App."
-"The quotes are from https://coinmarketcap.com and are updated every minutes."
+"The quotes are from https://coinmarketcap.com and are updated every reload of the app."
 ```
 
-display a table of summary data
-
-| Rank		| Ticker  | Name		  | Price      | % 1 Hour | % 24 Hours |
-| --------| --------| --------  | -----------|----------| -----------|
-| 1				|	BTC			|	Bitcoin	  |	$19,730.7	 | 1.1%			|	+6.73%     |
-| 2				|	ETH			|	Ethereum	|	$1587.32		 | 1.6%			|	+5.32%		 |
-
-type the number of the crypto currency to see more information
-Type exit to exit
-type l or list to go back
-type exit to exit
+type Y to see Top 15 Crypto of the day
+Type N to Exit
 
 ## Development
 
