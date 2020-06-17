@@ -22,15 +22,17 @@ class CLI
   end
 
   def user_input
-    puts '!!Chose A Number 1 to 15!!'
+    puts '!!Please chose a number 1 to 15!!'
+    puts '!!if input is invalid program will END!!'
     index = gets.chomp.to_i - 1
     name = Ticker.all[index]
-    last_ticker = Ticker.all.size - 1
-    unless index.between?(0, last_ticker)
-      puts '!!Chose A Number 1 to 15!!'
-      index = gets.chomp.to_i - 1
-      user_input
+    last_ticker = Ticker.all.size
+    unless index.between?(0, last_ticker - 1)
+      puts '!!Invalid input !!'
+      goodbye
+      exit
     end
+    # binding.pry
     puts "                                   Rank => #{name.cmc_rank}   "
     puts "                                   Name => #{name.name}       "
     puts "                                   Symbol => #{name.symbol}   "
