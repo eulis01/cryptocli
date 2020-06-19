@@ -9,7 +9,7 @@ class CLI
   end
 
   def welcome
-    puts '|=========================Welcome to the Cryto CLI ============================|'
+    puts '|========================= Welcome to the Cryto CLI ============================|'
     puts '|==============The data are from https://www.coinmarketcap.com ================|'
   end
 
